@@ -4,12 +4,11 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 function AddEditForm(props) {
   const[form, setValues] = useState({
     id: 0,
-    first: '',
-    last: '',
-    email: '',
-    phone: '',
-    location: '',
-    hobby: ''
+    name: '',
+    code: '',
+    weight: '',
+    quantity: '',
+    location: ''
   })
 
   const onChange = e => {
@@ -27,12 +26,11 @@ function AddEditForm(props) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        first: form.first,
-        last: form.last,
-        email: form.email,
-        phone: form.phone,
-        location: form.location,
-        hobby: form.hobby
+        name: form.name,
+        code: form.code,
+        weight: form.weight,
+        quantity: form.quantity,
+        location: form.location
       })
     })
       .then(response => response.json())
@@ -56,12 +54,11 @@ function AddEditForm(props) {
       },
       body: JSON.stringify({
         id: form.id,
-        first: form.first,
-        last: form.last,
-        email: form.email,
-        phone: form.phone,
-        location: form.location,
-        hobby: form.hobby
+        name: form.name,
+        code: form.code,
+        weight: form.weight,
+        quantity: form.quantity,
+        location: form.location
       })
     })
       .then(response => response.json())
@@ -79,36 +76,32 @@ function AddEditForm(props) {
 
   useEffect(() => {
     if(props.item){
-      const { id, first, last, email, phone, location, hobby } = props.item
-      setValues({ id, first, last, email, phone, location, hobby })
+      const { id,  name, code, weight, quantity, location  } = props.item
+      setValues({ id,  name, code, weight, quantity, location  })
     }
   }, false)
 
   return (
     <Form onSubmit={props.item ? submitFormEdit : submitFormAdd}>
       <FormGroup>
-        <Label for="first">First Name</Label>
-        <Input type="text" name="first" id="first" onChange={onChange} value={form.first === null ? '' : form.first} />
+        <Label for="name">Item Name</Label>
+        <Input type="text" name="name" id="name" onChange={onChange} value={form.name === null ? '' : form.name} />
       </FormGroup>
       <FormGroup>
-        <Label for="last">Last Name</Label>
-        <Input type="text" name="last" id="last" onChange={onChange} value={form.last === null ? '' : form.last}  />
+        <Label for="code">Code </Label>
+        <Input type="text" name="code" id="code" onChange={onChange} value={form.code === null ? '' : form.code}  placeholder="eg. FM-xxx01"/>
       </FormGroup>
       <FormGroup>
-        <Label for="email">Email</Label>
-        <Input type="email" name="email" id="email" onChange={onChange} value={form.email === null ? '' : form.email}  />
+        <Label for="weight">Weight (gram)</Label>
+        <Input type="weight" name="weight" id="weight" onChange={onChange} value={form.weight === null ? '' : form.weight}  />
       </FormGroup>
       <FormGroup>
-        <Label for="phone">Phone</Label>
-        <Input type="text" name="phone" id="phone" onChange={onChange} value={form.phone === null ? '' : form.phone}  placeholder="ex. 555-555-5555" />
+        <Label for="quantity">Quantity</Label>
+        <Input type="text" name="quantity" id="quantity" onChange={onChange} value={form.quantity === null ? '' : form.quantity}   />
       </FormGroup>
       <FormGroup>
         <Label for="location">Location</Label>
-        <Input type="text" name="location" id="location" onChange={onChange} value={form.location === null ? '' : form.location}  placeholder="City, State" />
-      </FormGroup>
-      <FormGroup>
-        <Label for="hobby">Hobby</Label>
-        <Input type="text" name="hobby" id="hobby" onChange={onChange} value={form.hobby}  />
+        <Input type="text" name="location" id="location" onChange={onChange} value={form.location === null ? '' : form.location}  placeholder="eg. XXX" />
       </FormGroup>
       <Button>Submit</Button>
     </Form>

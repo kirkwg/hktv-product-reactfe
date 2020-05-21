@@ -14,30 +14,30 @@ function DataTable(props){
       body: JSON.stringify({
         id
       })
-    })
+      })
       .then(response => response.json())
       .then(item => {
         props.deleteItemFromState(id)
       })
       .catch(err => console.log(err))
-    }
-  }
+	}
+ }
+
 
   const items = props.items.map(item => {
     return (
       <tr key={item.id}>
         <th scope="row">{item.id}</th>
-        <td>{item.first}</td>
-        <td>{item.last}</td>
-        <td>{item.email}</td>
-        <td>{item.phone}</td>
+        <td>{item.name}</td>
+        <td>{item.code}</td>
+        <td>{item.weight}</td>
+        <td>{item.quantity}</td>
         <td>{item.location}</td>
-        <td>{item.hobby}</td>
         <td>
           <div style={{width:"110px"}}>
             <ModalForm buttonLabel="Edit" item={item} updateState={props.updateState}/>
             {' '}
-            <Button color="danger" onClick={() => deleteItem(item.id)}>Del</Button>
+            <Button color="danger" onClick={() => deleteItem(item.id)}>Delete</Button>
           </div>
         </td>
       </tr>
@@ -49,12 +49,11 @@ function DataTable(props){
       <thead>
         <tr>
           <th>ID</th>
-          <th>First</th>
-          <th>Last</th>
-          <th>Email</th>
-          <th>Phone</th>
+          <th>Name</th>
+          <th>Code</th>
+          <th>Weight</th>
+          <th>Quantity</th>
           <th>Location</th>
-          <th>Hobby</th>
           <th>Actions</th>
         </tr>
       </thead>
